@@ -1,0 +1,23 @@
+
+Bug 1:
+emptySet_TestIsEmpty is failing
+Placed a breakpoint at emptySet_TestIsEmpty
+I saw that isEmpty was failing, so i traversed until I was in that method
+While exploring that method i noticed that isEmpty was returning false, when it was supposed to be returning true.
+This was caused by the condition being set for "rear < 0, but since rear is supposed to be 0 at that point, it was creating an issue
+When i saw this issue I then changed it to "rear == 0," so the it would return 0 as the value for an empty set, and not just return false, fixing the emptySet issue.
+
+Bug 2:
+emptySet_addA_A_testIsEmpty if failing
+Placed a breakpoint at emptySet_addA_A_testIsEmpty
+I noticed that isEmpty was failing, and was wondering why so i stepped in
+Once I stepped in until I reached the set's add method, and read the code to understand what it was doing. 
+I saw that it was adding the element, but not increasing the value of rear. Which is where the issue is formed as rear is returning empty, when it should be
+This was fixed when i added "rear++" on a seperate line, therefore rear is now increasing when it needs to as to not repeat the error.
+
+Bug 3: 
+A_addB_AB_testRemoveA is failing
+Placed a breakpoint at A_addB_AB_testRemoveA
+I noticed that when removing A, the process was failing, so I then stepped into the remove element A method
+While in the remove element method i noticed the if statement had a while loop, I saw that this while loop was going one to many times in the rear, and trying to access an out of bounds index
+Now that i located the issue, it can be fixed by changing the statement to "(i < rear - 1)" so it can account for the extra spot the rear was trying to remove, aftering adjusting the spacing
