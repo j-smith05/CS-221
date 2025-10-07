@@ -892,7 +892,8 @@ toString() returns "[A, B]"
     removeLast() returns C
     remove(A) returns A
     remove(B) throws NoSuchElementException
-    remove(C) returns      remove(-1) throws IndexOutOfBoundsException
+    remove(C) returns      
+    remove(-1) throws IndexOutOfBoundsException
     remove(0) returns A
     remove(1) returns C
     remove(2) throws IndexOutOfBoundsException
