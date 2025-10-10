@@ -153,12 +153,14 @@ public class ListTester {
 		//empty to 1-element list
 		testSingleElementList(emptyList_addToFrontA_A, "emptyList_addToFrontA_A", LIST_A, STRING_A);
 		testSingleElementList(emptyList_addToRearA_A, "emptyList_addToRearA_A", LIST_A, STRING_A);
+		testSingleElementList(emptyList_addAtIndex0A_A,"emptyList_addAtIndex0A_A", LIST_A, STRING_B);
 		testSingleElementList(AB_removeLast_A, "AB_removeLast_A", LIST_A, STRING_A);
 		testSingleElementList(A_set0toB_B, "A_set0toB_B", LIST_B, STRING_B);
 		testEmptyList(A_removeFirst_emptyList, "A_removeFirst_emptyList");
 		//1-element to 2-element
 		testTwoElementList(A_addToFrontB_BA, "A_addToFrontB_BA", LIST_BA, STRING_BA);
-		testTwoElementList(A_addToRearB_AB, "A_addToRearB_AB", LIST_AB, STRING_AB);	
+		testTwoElementList(A_addToRearB_AB, "A_addToRearB_AB", LIST_AB, STRING_AB);
+		testTwoElementList(A_addAtIndex1B_AB,"A_addAtIndex1B_AB", LIST_AB, STRING_AB);	
 		//1-element to changed 1-element via set()
 		//2-element to 1-element
 		testSingleElementList(AB_removeFirst_B, "AB_removeFirst_B", LIST_B, STRING_B);
@@ -259,7 +261,17 @@ public class ListTester {
 		return list;
 	}
 	private Scenario<Integer> A_addToRearB_AB = () -> A_addToRearB_AB();
-	
+
+	/** Scenario: [A] -> addAtIndex(1,B) -> [A,B]
+	 * @return [A,B] after addAtIndex(1,B)
+	 */
+	private IndexedUnsortedList<Integer> A_addAtIndex1B_AB() {
+		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A(); 
+		list.add(1,ELEMENT_B);
+		return list;
+	}
+	private Scenario<Integer> A_addAtIndex1B_AB = () -> A_addAtIndex1B_AB();
+
 	/** Scenario: empty list -> addToRear(A) -> [A] 
 	 * @return [A] after addToRear(A)
 	 */
@@ -270,6 +282,17 @@ public class ListTester {
 	}
 	private Scenario<Integer> emptyList_addToRearA_A = () -> emptyList_addToRearA_A();
 
+	/**Scenario: empty list -> addAtIndex(0,A) -> [A]
+	 * @return [A] after addAtIndex(0,A)
+	 */	
+	private IndexedUnsortedList<Integer> emptyList_addAtIndex0A_A() {
+		IndexedUnsortedList<Integer> list = newList(); 
+		list.add(0,ELEMENT_A);
+		return list;
+	}
+	private Scenario<Integer> emptyList_addAtIndex0A_A = () -> emptyList_addAtIndex0A_A();
+
+	 
 	/** Scenario: [A,B] -> removeLast() -> [A]
  	* @return [A] after removeLast()
  	*/
