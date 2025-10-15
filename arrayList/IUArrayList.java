@@ -50,8 +50,6 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public void addToRear(T element) {
-        // Implementation here
-        // throw new UnsupportedOperationException("Unimplemented method 'addToRear'");
         expandIfNecessary();
         array[rear] = element;
         rear++;
@@ -82,20 +80,31 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public T removeLast() {
-        // Implementation here
-        return null; // Placeholder return
+       if (isEmpty()) throw new NoSuchElementException();
+        T result = array[--rear];
+        array[rear] = null;
+        return result;
     }
 
     @Override
     public T remove(T element) {        
-        // Implementation here
-        return null; // Placeholder return
+        int index = indexOf(element);
+        if (index == -1) throw new NoSuchElementException();
+        return remove(index);
     }
 
     @Override
     public T remove(int index) {        
-        // Implementation here
-        return null; // Placeholder return
+        if (index < 0 || index >= rear) {
+            throw new IndexOutOfBoundsException();
+        }
+        T returnValue = array[index];
+        for(int i = index; i < rear - 1; i++) {
+            array[i] = array[i+1];
+        }
+        rear --;
+        array[rear] = null;
+        return returnValue;
     }
 
     @Override
@@ -153,6 +162,21 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
     @Override
     public void set(int index, T element) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("[");
+        for (int i = 0; i < rear; i++) {
+            str.append(array[i].toString());
+            str.append(", ");
+        }
+        if (!isEmpty()) {
+            str.delete(str.length() -2, str.length());
+        }
+        str.append("]");
+        return str.toString();
     }
 
     @Override
