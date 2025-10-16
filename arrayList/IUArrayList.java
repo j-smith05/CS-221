@@ -45,8 +45,10 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
     public void addToFront(T element) {
         expandIfNecessary();
         for (int i = rear; i > 0; i--) {
-            
+            array[i] = array[i - 1];
         }
+        array[0] = element;
+        rear++;
     }
 
     @Override
@@ -63,20 +65,34 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public void addAfter(T element, T target) {
-        // Implementation here
-        throw new UnsupportedOperationException("Unimplemented method 'addAfter'");
+        int index = indexOf(target);
+        if (index == -1) throw new NoSuchElementException();
+        add(index + 1, element);
     }   
 
     @Override
     public void add(int index, T element) {
-        // Implementation here
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        if (index < 0 || index > rear) {
+            throw new IndexOutOfBoundsException();
+        }
+        expandIfNecessary();
+        for (int i = rear; i > index; i--) {
+            array[i] = array[i - 1];
+        }
+        array[index] = element;
+        rear++;
     }   
 
     @Override
     public T removeFirst() {
-        // Implementation here
-        return null; // Placeholder return
+        if (isEmpty()) throw new NoSuchElementException();
+        T result = array[0];
+        for (int i = 0; i < rear - 1; i++) {
+            array[i] = array[i + 1];
+        }
+        rear--;
+        array[rear] = null;
+        return result;
     }
 
     @Override
@@ -126,7 +142,9 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public T get(int index) {     
-      
+        if (index < 0 || index >= rear) {
+            throw new IndexOutOfBoundsException();
+        }
         return array[index];
     }
     // is the lazy or faster way to follow this practice
@@ -162,7 +180,10 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public void set(int index, T element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+         if (index < 0 || index >= rear) {
+        throw new IndexOutOfBoundsException();
+        }
+        array[index] = element;
     }
 
     @Override
