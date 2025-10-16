@@ -147,6 +147,8 @@ public class ListTester {
 		String STRING_B = "B";
 		Integer[] LIST_BC = {ELEMENT_B, ELEMENT_C};
 		String STRING_BC = "BC";
+		Integer[] LIST_CA = {ELEMENT_C, ELEMENT_A};
+		String STRING_CA = "CA";
 		Integer[] LIST_CAB = {ELEMENT_C, ELEMENT_A, ELEMENT_B};
 		String STRING_CAB = "CAB";
 		Integer[] LIST_ABC = {ELEMENT_A, ELEMENT_B, ELEMENT_C};
@@ -178,8 +180,11 @@ public class ListTester {
 		testThreeElementList(AB_addToFrontC_CAB, "AB_addToFrontC_CAB", LIST_CAB, STRING_CAB);
 		testThreeElementList(AB_addToRearC_ABC, "AB_addToRearC_ABC", LIST_ABC, STRING_ABC);
 		//2-element to changed 2-element via set()
-		testTwoElementList(BA_set1toC_BC, "BA_set1toC_BC", LIST_BC, STRING_BC);	
+		testTwoElementList(BA_set1toC_BC, "BA_set1toC_BC", LIST_BC, STRING_BC);
+		testTwoElementList(BA_set0toC_BC, "BA_set0toC_BC", LIST_CA, STRING_CA);
 		//3-element to 2-element
+		testTwoElementList(ABC_removeFirst_BC, "ABC_removeFirst_BC", LIST_BC, STRING_BC);
+		testTwoElementList(ABC_removeLast_AB, "ABC_removeLast_AB", LIST_AB, STRING_AB);
 
 		//3-element to changed 3-element via set()
 		//Iterator concurrency tests
@@ -403,6 +408,16 @@ public class ListTester {
 	}
 	private Scenario<Integer> BA_set1toC_BC = () -> BA_set1toC_BC();
 
+	/** Scenario: [B,A] -> set(0,C) -> [C,A]
+ 	* @return [C,A] after set(0,C)
+ 	*/
+	private IndexedUnsortedList<Integer> BA_set0toC_BC() {
+	IndexedUnsortedList<Integer> list = A_addToFrontB_BA();
+	list.set(0, ELEMENT_C);
+	return list;
+	}
+	private Scenario<Integer> BA_set0toC_BC = () -> BA_set0toC_BC();
+
 	/** Scenario: [A,B] -> addToFront(C) -> [C,A,B]
  	* @return [C,A,B] after addToFront(C)
  	*/
@@ -423,6 +438,25 @@ public class ListTester {
 	}
 	private Scenario<Integer> AB_addToRearC_ABC = () -> AB_addToRearC_ABC();
 
+	/** Scenario: [A,B,C] -> removeFirst() -> [B,C]
+ 	* @return [B,C] after removeFirst()
+ 	*/
+	private IndexedUnsortedList<Integer> ABC_removeFirst_BC() {
+	IndexedUnsortedList<Integer> list = AB_addToRearC_ABC();
+	list.removeFirst();
+	return list;
+	}
+	private Scenario<Integer> ABC_removeFirst_BC = () -> ABC_removeFirst_BC();
+
+	/** Scenario: [A,B,C] -> removeLast() -> [A,B]
+ 	* @return [A,B] after removeLast()
+ 	*/
+	private IndexedUnsortedList<Integer> ABC_removeLast_AB() {
+	IndexedUnsortedList<Integer> list = AB_addToRearC_ABC();
+	list.removeLast();
+	return list;
+	}
+	private Scenario<Integer> ABC_removeLast_AB = () -> ABC_removeLast_AB();
 
 	
 	/////////////////////////////////
