@@ -147,7 +147,6 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
         }
         return array[index];
     }
-    // is the lazy or faster way to follow this practice
 
     @Override
     public int indexOf(T element) {    
@@ -215,6 +214,5 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
     public ListIterator<T> listIterator(int startingIndex) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
 }
 
