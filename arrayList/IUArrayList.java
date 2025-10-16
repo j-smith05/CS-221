@@ -202,7 +202,7 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new ALIterator();
     }
 
     @Override
@@ -214,5 +214,50 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
     public ListIterator<T> listIterator(int startingIndex) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-}
+
+    /** Basic Iterator for IUArrayList
+     */
+    private class ALIterator implements Iterator<T> {
+        private int nextIndex;
+        private boolean canRemove;
+
+        /** Intitialize Iterator before first element */
+        public ALIterator() {
+            nextIndex = 0;
+            canRemove = false;
+        }
+
+        /** Returns true if the iteration has more elements */
+        public boolean hasNext() {
+            return nextIndex < rear;
+        }
+
+        /** Returns the next element in the iteration
+         * @throws NoSuchElementException if there are no more elements
+         */
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            // T returnValue = array[nextIndex];
+            nextIndex++;
+            canRemove = true; // can remove after next()
+            return array[nextIndex - 1];
+        }
+        /** Removes from the underlying collection the last element 
+        * returned by this iterator. 
+        */
+
+        @Override
+        public void remove() {
+            if (!canRemove) {
+                throw new IllegalStateException();
+            }
+            IUArrayList.this.remove(nextIndex - 1);
+            nextIndex--;
+            canRemove = false; // can only remove once per next()
+        }
+    }
+
+} //End of IUArrayList
 
