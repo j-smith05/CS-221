@@ -6,7 +6,13 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
- * An array-based implementation of IndexedUnsortedList
+ * IUArrayList implementation of IndexedUnsortedList interface using a
+ * generic array to hold the list elements.
+ * Resizes the array as needed when new elements are added.
+ * Supports adding, removing, and accessing elements by index.
+ * Provides an iterator for traversing the list.
+ * Supports basic list operations such as size, isEmpty, contains, and indexOf.
+ * @author Jacob Smith
  */
 public class IUArrayList<T> implements IndexedUnsortedList<T> {
     private T[] array;
@@ -19,8 +25,6 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
      * initialize list with default capacity
      */
     public IUArrayList() {
-        // array = (T[])(new Object[DEFAULT_CAPACITY]);
-        // rear = 0;
         this(DEFAULT_CAPACITY);
     }
 
@@ -160,9 +164,7 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public int indexOf(T element) {    
-        // int index = -1;
         for (int i=0;i<rear;i++){
-            // if (int i = 0; index < 0 && i < rear; i++) {
             if (array[i].equals(element)){
                 return i;
                 // index=i;
@@ -239,7 +241,7 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
             iterModCount = modCount;
         }
 
-        /** Returns true if the iteration has more elements */
+        @Override
         public boolean hasNext() {
             if (iterModCount != modCount) {
                 throw new ConcurrentModificationException();
@@ -247,21 +249,15 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
             return nextIndex < rear;
         }
 
-        /** Returns the next element in the iteration
-         * @throws NoSuchElementException if there are no more elements
-         */
+        @Override
         public T next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            // T returnValue = array[nextIndex];
             nextIndex++;
-            canRemove = true; // can remove after next()
+            canRemove = true;
             return array[nextIndex - 1];
         }
-        /** Removes from the underlying collection the last element 
-        * returned by this iterator. 
-        */
 
         @Override
         public void remove() {
@@ -271,18 +267,18 @@ public class IUArrayList<T> implements IndexedUnsortedList<T> {
             if (!canRemove) {
                 throw new IllegalStateException();   
             }
-            canRemove = false; // can only remove once per next()
+            canRemove = false;
             
             for (int i = nextIndex-1; i < rear - 1; i++) {
                 array[i] = array[i + 1];
             }
 
-            array[rear - 1] = null; // clear last element
-            rear--; // list size decreases by 1
-            nextIndex--; // adjust nextIndex after remove
-            modCount++; // list has been modified
-            iterModCount++; // iterator is now up-to-date  
+            array[rear - 1] = null;
+            rear--;
+            nextIndex--;
+            modCount++; 
+            iterModCount++; 
         }
     }
-} //End of IUArrayList
+}
 
