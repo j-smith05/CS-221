@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * An Iterator with working remove() method is implemented, but
  * ListIterator is unsupported.
  * 
- * @author 
+ * @author Jacob Smith
  * 
  * @param <T> type to store
  */
@@ -25,19 +25,33 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 
 	@Override
 	public void addToFront(T element) {
-		// TODO
+		Node<T> newNode = new Node<T>(element);
+		newNode.setNext(head);
+		head = newNode;
+		if (tail == null) {
+			tail = newNode;
+		}
+		size++;
+		modCount++;
 	}
 
 	@Override
 	public void addToRear(T element) {
-		// TODO 
-		
+		Node<T> newNode = new Node<T>(element);
+		if (!isEmpty()) {
+			tail.setNext(newNode);
+		}
+		else {
+			head = newNode;
+		}
+		tail = newNode;
+		size++;
+		modCount++;
 	}
 
 	@Override
 	public void add(T element) {
-		// TODO 
-		
+		addToRear(element);	
 	}
 
 	@Override
@@ -48,14 +62,23 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 
 	@Override
 	public void add(int index, T element) {
-		// TODO 
+		 // TODO
 		
 	}
 
 	@Override
 	public T removeFirst() {
-		// TODO 
-		return null;
+		if (isEmpty()) {
+			throw new NoSuchElementException();
+		}
+		Node<T> firstNode = head;
+		head = head.getNext();
+		if (head == null) {
+			tail = null;
+		}
+		size--;
+		modCount++;
+		return firstNode.getElement();
 	}
 
 	@Override
@@ -66,42 +89,8 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 
 	@Override
 	public T remove(T element) {
-		if (isEmpty()) {
-			throw new NoSuchElementException();
-		}
-		
-		boolean found = false;
-		Node<T> previous = null;
-		Node<T> current = head;
-		
-		while (current != null && !found) {
-			if (element.equals(current.getElement())) {
-				found = true;
-			} else {
-				previous = current;
-				current = current.getNext();
-			}
-		}
-		
-		if (!found) {
-			throw new NoSuchElementException();
-		}
-		
-		if (size() == 1) { //only node
-			head = tail = null;
-		} else if (current == head) { //first node
-			head = current.getNext();
-		} else if (current == tail) { //last node
-			tail = previous;
-			tail.setNext(null);
-		} else { //somewhere in the middle
-			previous.setNext(current.getNext());
-		}
-		
-		size--;
-		modCount++;
-		
-		return current.getElement();
+		// TODO 
+		return null;
 	}
 
 	@Override
@@ -118,44 +107,59 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 
 	@Override
 	public T get(int index) {
-		// TODO 
-		return null;
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		Node<T> currentNode = head;
+		for (int i = 0; i < index; i++) {
+			currentNode = currentNode.getNext();
+		}
+		return currentNode.getElement();
 	}
 
 	@Override
 	public int indexOf(T element) {
-		// TODO 
-		return 0;
+		int index = 0;
+		Node<T> currentNode = head;
+		while (currentNode != null && !element.equals(currentNode.getElement())) {
+			currentNode = currentNode.getNext();
+			index++;
+		}
+		if (currentNode == null) {
+			index = -1;
+		}
+		return index;
 	}
 
 	@Override
 	public T first() {
-		// TODO 
-		return null;
+		if (isEmpty()) {
+			throw new IllegalStateException();
+		}
+		return head.getElement();
 	}
 
 	@Override
 	public T last() {
-		// TODO 
-		return null;
+		if (isEmpty()) {
+			throw new IllegalStateException();
+		}
+		return tail.getElement();
 	}
 
 	@Override
 	public boolean contains(T target) {
-		// TODO 
-		return false;
+		return indexOf(target) > -1;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO 
-		return false;
+		return size == 0;
 	}
 
 	@Override
 	public int size() {
-		// TODO 
-		return 0;
+		return size;
 	}
 
 	@Override
@@ -201,78 +205,5 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 			// TODO
 		}
 	}
-
-/**
- * Node represents a node in a linked list.
- *
- * @author Java Foundations, mvail
- * @version 4.0
- */
-public class Node<E> {
-	private Node<E> next;
-	private E element;
-
-	/**
-  	 * Creates an empty node.
-  	 */
-	public Node() {
-		next = null;
-		element = null;
-	}
-
-	/**
-  	 * Creates a node storing the specified element.
- 	 *
-  	 * @param elem
-  	 *            the element to be stored within the new node
-  	 */
-	public Node(E elem) {
-		next = null;
-		element = elem;
-	}
-
-	/**
- 	 * Returns the node that follows this one.
-  	 *
-  	 * @return the node that follows the current one
-  	 */
-	public Node<E> getNext() {
-		return next;
-	}
-
-	/**
- 	 * Sets the node that follows this one.
- 	 *
- 	 * @param node
- 	 *            the node to be set to follow the current one
- 	 */
-	public void setNext(Node<E> node) {
-		next = node;
-	}
-
-	/**
- 	 * Returns the element stored in this node.
- 	 *
- 	 * @return the element stored in this node
- 	 */
-	public E getElement() {
-		return element;
-	}
-
-	/**
- 	 * Sets the element stored in this node.
-  	 *
-  	 * @param elem
-  	 *            the element to be stored in this node
-  	 */
-	public void setElement(E elem) {
-		element = elem;
-	}
-
-	@Override
-	public String toString() {
-		return "Element: " + element.toString() + " Has next: " + (next != null);
-	}
-}
 
 }
