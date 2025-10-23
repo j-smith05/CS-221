@@ -26,7 +26,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 	@Override
 	public void addToFront(T element) {
 		Node<T> newNode = new Node<T>(element);
-		newNode.setNext(head);
+		newNode.setNextNode(head);
 		head = newNode;
 		if (tail == null) {
 			tail = newNode;
@@ -39,7 +39,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 	public void addToRear(T element) {
 		Node<T> newNode = new Node<T>(element);
 		if (!isEmpty()) {
-			tail.setNext(newNode);
+			tail.setNextNode(newNode);
 		}
 		else {
 			head = newNode;
@@ -72,7 +72,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 			throw new NoSuchElementException();
 		}
 		Node<T> firstNode = head;
-		head = head.getNext();
+		head = head.getNextNode();
 		if (head == null) {
 			tail = null;
 		}
@@ -112,7 +112,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 		}
 		Node<T> currentNode = head;
 		for (int i = 0; i < index; i++) {
-			currentNode = currentNode.getNext();
+			currentNode = currentNode.getNextNode();
 		}
 		return currentNode.getElement();
 	}
@@ -122,7 +122,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 		int index = 0;
 		Node<T> currentNode = head;
 		while (currentNode != null && !element.equals(currentNode.getElement())) {
-			currentNode = currentNode.getNext();
+			currentNode = currentNode.getNextNode();
 			index++;
 		}
 		if (currentNode == null) {

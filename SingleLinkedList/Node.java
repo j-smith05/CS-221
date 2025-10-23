@@ -1,66 +1,46 @@
-public class Node<E> {
-	private Node<E> next;
-	private E element;
+/**
+ * Linkable node for linear data structures
+ * @author Jacob Smith
+ */
 
-	/**
-  	 * Creates an empty node.
-  	 */
-	public Node() {
-		next = null;
-		element = null;
-	}
+public class Node<T> {
 
-	/**
-  	 * Creates a node storing the specified element.
- 	 *
-  	 * @param elem
-  	 *            the element to be stored within the new node
-  	 */
-	public Node(E elem) {
-		next = null;
-		element = elem;
-	}
+    private Node<T> nextNode;
+    private T element;
 
-	/**
- 	 * Returns the node that follows this one.
-  	 *
-  	 * @return the node that follows the current one
-  	 */
-	public Node<E> getNext() {
-		return next;
-	}
+    /**
+     * Initialize a new node with the given element
+     * @param element
+     */
+    public Node(T element) {
+        this.element = element;
+        nextNode = null;
+    }
 
-	/**
- 	 * Sets the node that follows this one.
- 	 *
- 	 * @param node
- 	 *            the node to be set to follow the current one
- 	 */
-	public void setNext(Node<E> node) {
-		next = node;
-	}
+    /**
+     * Initialize a Node with the given element and next Node
+     * 
+     * @param element
+     * @param nextNode
+     */
+    public Node(T element, Node<T> nextNode) {
+        this.element = element;
+        this.nextNode = nextNode;
+    }
 
-	/**
- 	 * Returns the element stored in this node.
- 	 *
- 	 * @return the element stored in this node
- 	 */
-	public E getElement() {
-		return element;
-	}
+    public Node<T> getNextNode() {
+        return nextNode;
+    }
 
-	/**
- 	 * Sets the element stored in this node.
-  	 *
-  	 * @param elem
-  	 *            the element to be stored in this node
-  	 */
-	public void setElement(E elem) {
-		element = elem;
-	}
+    public void setNextNode(Node<T> nextNode) {
+        this.nextNode = nextNode;
+    }
 
-	@Override
-	public String toString() {
-		return "Element: " + element.toString() + " Has next: " + (next != null);
-	}
+    public T getElement() {
+        return element;
+    }
+
+    public void setElement(T element) {
+        this.element = element;
+    }
 }
