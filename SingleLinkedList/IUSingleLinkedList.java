@@ -13,7 +13,8 @@ import java.util.NoSuchElementException;
  * @param <T> type to store
  */
 public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
-	private Node<T> head, tail;
+	private Node<T> head;
+	private Node<T> tail;
 	private int size;
 	private int modCount;
 	
@@ -71,8 +72,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 			tail = newNode;
 		}
 		size++;
-		modCount++;
-		
+		modCount++;	
 	}
 
 	@Override
@@ -94,8 +94,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 			currentNode.setNextNode(newNode);
 			size++;
 			modCount++;
-		}
-		
+		}	
 	}
 
 	@Override
@@ -197,6 +196,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 			currentNode = currentNode.getNextNode();
 		}
 		currentNode.setElement(element);
+		modCount++;
 	}
 
 	@Override
@@ -228,7 +228,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 	@Override
 	public T first() {
 		if (isEmpty()) {
-			throw new IllegalStateException();
+			throw new NoSuchElementException();
 		}
 		return head.getElement();
 	}
@@ -236,7 +236,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 	@Override
 	public T last() {
 		if (isEmpty()) {
-			throw new IllegalStateException();
+			throw new NoSuchElementException();
 		}
 		return tail.getElement();
 	}
@@ -256,7 +256,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 		return size;
 	}
 
-	    @Override
+	@Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("[");
@@ -278,27 +278,35 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 
 	@Override
 	public ListIterator<T> listIterator() {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
 	}
 
 	@Override
 	public ListIterator<T> listIterator(int startingIndex) {
-		throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
 	}
 
-	/** Iterator for IUSingleLinkedList */
+	/** Basic Iterator for IUSingleLinkedList */
 	private class SLLIterator implements Iterator<T> {
 		private Node<T> nextNode;
 		private int iterModCount;
-		
-		/** Creates a new iterator for the list */
+		private boolean canRemove = false;
+
+		/** Intitalize Iterator before first Element */
 		public SLLIterator() {
 			nextNode = head;
 			iterModCount = modCount;
+			canRemove = false;
 		}
+
+		private void checkForComod() {
+        if (iterModCount != modCount) throw new ConcurrentModificationException();
+    	}
 
 		@Override
 		public boolean hasNext() {
+			checkForComod();
+			canRemove = true;
 			return nextNode != null;
 		}
 
@@ -307,41 +315,38 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
-			T element = nextNode.getElement();
+			T retVal = nextNode.getElement();
 			nextNode = nextNode.getNextNode();
-
-			return element;
+			return retVal;
 		}
-		
+
 		@Override
 		public void remove() {
-			if (iterModCount != modCount) {
-				throw new ConcurrentModificationException();
-			}
-			if (nextNode == null) {
+			checkForComod();
+			if (!canRemove) {
 				throw new IllegalStateException();
 			}
-			Node<T> currentNode = head;
-			Node<T> previousNode = null;
-			while (currentNode != null && currentNode != nextNode) {
-				previousNode = currentNode;
-				currentNode = currentNode.getNextNode();
-			}
-			if (currentNode == null) {
-				throw new IllegalStateException();
-			}
-			if (previousNode == null) {
-				head = nextNode.getNextNode();
+			canRemove = false;
+
+			if (head.getNextNode() == nextNode) {
+				head = head.getNextNode();
+				if (head == null) { // or size == 1 or nextNode == null
+					tail = null;
+				}
 			} else {
-				previousNode.setNextNode(nextNode.getNextNode());
-			}
-			if (nextNode == tail) {
-				tail = previousNode;
+				//general case - find "previousPreviousNode"
+				Node<T> previousPreviousNode = head;
+				while (previousPreviousNode.getNextNode().getNextNode() != nextNode) {
+					previousPreviousNode = previousPreviousNode.getNextNode();
+				}
+				previousPreviousNode.setNextNode(nextNode);
+				if (nextNode == null) {
+					tail = previousPreviousNode;
+				}
 			}
 			size--;
 			modCount++;
 			iterModCount++;
 		}
 	}
-
 }
