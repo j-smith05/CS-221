@@ -85,16 +85,16 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 		} else if (index == size) {
 			addToRear(element);
 		} else {
-			Node<T> newNode = new Node<>(element);
 			Node<T> currentNode = head;
 			for (int i = 0; i < index - 1; i++) {
 				currentNode = currentNode.getNextNode();
 			}
+			Node<T> newNode = new Node<>(element);
 			newNode.setNextNode(currentNode.getNextNode());
 			currentNode.setNextNode(newNode);
 			size++;
 			modCount++;
-		}	
+		}
 	}
 
 	@Override
