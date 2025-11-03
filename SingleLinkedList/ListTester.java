@@ -261,6 +261,12 @@ public class ListTester {
 	// XXX SCENARIO BUILDERS
 	//////////////////////////////////////
 
+	// The following creates a "lambda" reference that allows us to pass a scenario
+	//  builder method as an argument. You don't need to worry about how it works -
+	//  just make sure each scenario building method has a corresponding Scenario 
+	//  assignment statement as in these examples. 
+	private Scenario<Integer> newList = () -> newList();
+
 	/** Scenario: [A] -> removeFirst() -> [ ] 
  	* @return [ ] after removeFirst()
  	*/
@@ -300,12 +306,6 @@ public class ListTester {
 		return list;
 	}
 	private Scenario<Integer> A_removeIndex0_emptyList = () -> A_removeIndex0_emptyList();
-
-	// The following creates a "lambda" reference that allows us to pass a scenario
-	//  builder method as an argument. You don't need to worry about how it works -
-	//  just make sure each scenario building method has a corresponding Scenario 
-	//  assignment statement as in these examples. 
-	private Scenario<Integer> newList = () -> newList();
 
 	/** Scenario: empty list -> addToFront(A) -> [A] 
 	 * @return [A] after addToFront(A)
