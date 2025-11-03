@@ -5,13 +5,14 @@ import java.util.NoSuchElementException;
 
 /**
  * Single-linked node implementation of IndexedUnsortedList.
- * An Iterator with working remove() method is implemented, but
- * ListIterator is unsupported.
- * 
+ * Each node contains a reference to the next node in the list.
+ * The list maintains references to both the head and tail nodes.
+ * Supports adding, removing, and accessing elements by index.
+ * Provides an iterator for traversing the list. Supports basic 
+ * list operations such as size, isEmpty, contains, and indexOf.
  * @author Jacob Smith
- * 
- * @param <T> type to store
  */
+
 public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 	private Node<T> head;
 	private Node<T> tail;
