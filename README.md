@@ -1,24 +1,91 @@
-# CS-221
-This repository is for my CS 221 assignments
+# 🎓 CS 221 — Boise State University
 
-#GridMonitor_files
-This is a document that inputs data and creates a 2D array with said information
+This repository contains my assignments and projects for **CS 221: Data Structures & Algorithms**.  
+Each folder represents a different assignment or lab focused on Java programming, debugging, and algorithm analysis.
 
-#Debug
-This is a pile of code that had 3 issues, and I had to find and document them, while
-using the debugger to learn it.
+---
 
-#FormatChecker
-This is a file that checks the format of files, making sure there aren't strings, doubles,
-more information, not enough information, etc. Of Files inserted via the Java command line.
+## 📂 Projects Overview
 
-#AoA
-This is a document of small methods, used to determine the Analysis of Algorithms. And a word.docx
-as an assignment to complete the assignment.
+### 🧮 GridMonitor_files
+A Java program that **reads input data** and constructs a **2D array** from it.  
+Used to analyze grid data and perform calculations across a dataset.
 
-#lists1
-This is a document containing a .txt file to plan for tests via a ListTester to be implemented later
+---
 
-#lists2
-This is a program containing a ListTester.java file to run tests described in lists1, and runs them 
-through GoodList.java, which will pass most tests, and BadList.java, which will fail most tests
+### 🐞 Debug
+A collection of code snippets containing **three intentional bugs**.  
+The goal was to **identify, document, and fix** each issue using the Java debugger.
+
+---
+
+### 🧾 FormatChecker
+A Java file that validates the **format of input files**.  
+Ensures there are no incorrect data types (strings, doubles, missing, or extra data)  
+When files are read via the command line.
+
+---
+
+### ⚙️ AoA (Analysis of Algorithms)
+Contains small Java methods used to analyze **algorithm efficiency** and complexity.  
+Also includes a Word document explaining the assignment and results.
+
+---
+
+### 🧪 lists1
+Contains a planning `.txt` file outlining **test scenarios** for future implementation in `ListTester.java`.
+
+---
+
+### 🧩 lists2
+Implements the **ListTester** described in `lists1`.  
+Tests are run against:
+- `GoodList.java` → passes most tests  
+- `BadList.java` → fails most tests (for debugging and analysis)
+
+---
+
+### 🗂️ ArrayList
+Implements a **custom ArrayList** class that provides dynamic array-based list behavior.  
+Focuses on indexing, resizing, and supporting list operations efficiently.  
+Tested using multiple list scenarios through the `ListTester` framework.
+
+---
+
+### 🔗 SingleLinkedList
+Implements a **singly linked list** structure using node-based connections.  
+Covers pointer manipulation, traversal logic, and iterator handling.  
+Emphasizes proper memory management and reference updating during add/remove operations.
+
+---
+
+### 🧬 DoubleLinkedList
+Implements a **doubly linked list** with both forward and backward traversal capabilities.  
+Supports efficient insertion and removal at both ends.  
+Extensively tested using the `ListTester` to ensure iterator correctness and list integrity.
+
+---
+
+## 🛠️ Technologies Used
+- **Java**
+- **JUnit Testing**
+- **Text-based Input Parsing**
+- **Algorithmic Analysis**
+
+---
+
+## 📘 Notes
+These projects were part of coursework emphasizing:
+- Debugging skills  
+- Algorithmic thinking  
+- Unit testing  
+- Software reliability
+
+---
+
+## 🧑‍💻 Author
+**Jacob Smith**  
+*B.S. in Computer Science | Cybersecurity Emphasis*  
+📍 Boise State University  
+🔗 [LinkedIn](https://www.linkedin.com/in/jacobedgarsmith/)
+
