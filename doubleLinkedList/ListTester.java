@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * NOTE: One example test is given for each interface method using a new list to
  * get you started.
  * 
- * @author mvail, mhthomas, awinters
+ * @author mvail, mhthomas, awinters, and Jacob Smith
  */
 @SuppressWarnings("deprecated")
 public class ListTester {
