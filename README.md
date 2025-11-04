@@ -1,6 +1,6 @@
 # 🎓 CS 221 — Boise State University
 
-This repository contains my assignments and projects for **CS 221: Data Structures & Algorithms**.  
+This repository contains my assignments and projects for **CS 221: Computer Science II**.  
 Each folder represents a different assignment or lab focused on Java programming, debugging, and algorithm analysis.
 
 ---
