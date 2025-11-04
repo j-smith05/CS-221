@@ -28,7 +28,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 
 	@Override
 	public void addToFront(T element) {
-		Node<T> newNode = new Node<>(element);
+		Node<T> newNode = new Node<T>(element);
 		newNode.setNextNode(head);
 		head = newNode;
 		if (tail == null) {
@@ -40,7 +40,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 
 	@Override
 	public void addToRear(T element) {
-		Node<T> newNode = new Node<>(element);
+		Node<T> newNode = new Node<T>(element);
 		if (!isEmpty()) {
 			tail.setNextNode(newNode);
 		}
@@ -66,7 +66,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 		if (currentNode == null) {
 			throw new NoSuchElementException();
 		}
-		Node<T> newNode = new Node<>(element);
+		Node<T> newNode = new Node<T>(element);
 		newNode.setNextNode(currentNode.getNextNode());
 		currentNode.setNextNode(newNode);
 		if (currentNode == tail) {
@@ -90,7 +90,7 @@ public class IUSingleLinkedList<T> implements IndexedUnsortedList<T> {
 			for (int i = 0; i < index - 1; i++) {
 				currentNode = currentNode.getNextNode();
 			}
-			Node<T> newNode = new Node<>(element);
+			Node<T> newNode = new Node<T>(element);
 			newNode.setNextNode(currentNode.getNextNode());
 			currentNode.setNextNode(newNode);
 			size++;

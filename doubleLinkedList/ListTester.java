@@ -20,7 +20,7 @@ public class ListTester {
 		goodList, badList, arrayList, singleLinkedList, doubleLinkedList
 	};
 	// TODO: THIS IS WHERE YOU CHOOSE WHICH LIST TO TEST
-	private final static ListToUse LIST_TO_USE = ListToUse.singleLinkedList;
+	private final static ListToUse LIST_TO_USE = ListToUse.doubleLinkedList;
 
 	// possible results expected in tests
 	private enum Result {
@@ -248,9 +248,9 @@ public class ListTester {
 		case singleLinkedList:
 			listToUse = new IUSingleLinkedList<Integer>();
 			break;
-//		case doubleLinkedList:
-//			listToUse = new IUDoubleLinkedList<Integer>();
-//			break;
+		case doubleLinkedList:
+			listToUse = new IUDoubleLinkedList<Integer>();
+			break;
 		default:
 			listToUse = null;
 		}
@@ -947,7 +947,6 @@ public class ListTester {
 			printTest(scenarioName + "_testRemove0", testRemoveIndex(scenario.build(), 0, contents[0], Result.MatchingValue));
 			printTest(scenarioName + "_testRemove1", testRemoveIndex(scenario.build(), 1, contents[1], Result.MatchingValue));
 			printTest(scenarioName + "_testRemove2", testRemoveIndex(scenario.build(), 2, null, Result.IndexOutOfBounds));
-			// Iterator
 			printTest(scenarioName + "_testIter", testIter(scenario.build(), Result.NoException));
 			printTest(scenarioName + "_testIterHasNext", testIterHasNext(scenario.build().iterator(), Result.True));
 			printTest(scenarioName + "_testIterNext", testIterNext(scenario.build().iterator(), contents[0], Result.MatchingValue));
@@ -964,7 +963,6 @@ public class ListTester {
 			printTest(scenarioName + "_iterNextNextRemove_testIterHasNext", testIterHasNext(iterAfterRemove(iterAfterNext(scenario.build(), 2)), Result.False));
 			printTest(scenarioName + "_iterNextNextRemove_testIterNext", testIterNext(iterAfterRemove(iterAfterNext(scenario.build(), 2)), null, Result.NoSuchElement));
 			printTest(scenarioName + "_iterNextNextRemove_testIterRemove", testIterRemove(iterAfterRemove(iterAfterNext(scenario.build(), 2)), Result.IllegalState));
-			//Using an overloaded version of interAfterNext that takes the return type of iterAfterRemove for all NextRemoveNext
 			printTest(scenarioName + "_iterNextRemoveNext_testIterHasNext", testIterHasNext(iterAfterNext(iterAfterRemove(iterAfterNext(scenario.build(), 1)), 1), Result.False));
 			printTest(scenarioName + "_iterNextRemoveNext_testIterNext", testIterNext(iterAfterNext(iterAfterRemove(iterAfterNext(scenario.build(), 1)), 1), null, Result.NoSuchElement));
 			printTest(scenarioName + "_iterNextRemoveNext_testIterRemove", testIterRemove(iterAfterNext(iterAfterRemove(iterAfterNext(scenario.build(), 1)), 1), Result.NoException));
@@ -999,6 +997,7 @@ public class ListTester {
 			printTest(scenarioName + "_testRemove" + contentsString.charAt(0), testRemoveElement(scenario.build(), contents[0], Result.MatchingValue));
 			printTest(scenarioName + "_testRemove" + contentsString.charAt(1), testRemoveElement(scenario.build(), contents[1], Result.MatchingValue));
 			printTest(scenarioName + "_testRemove" + contentsString.charAt(2), testRemoveElement(scenario.build(), contents[2], Result.MatchingValue));
+			printTest(scenarioName + "_testRemove", testRemoveIndex(scenario.build(), 3, null, Result.IndexOutOfBounds));
 			printTest(scenarioName + "_testRemoveX", testRemoveElement(scenario.build(), ELEMENT_X, Result.NoSuchElement));
 			printTest(scenarioName + "_testFirst", testFirst(scenario.build(), contents[0], Result.MatchingValue));
 			printTest(scenarioName + "_testLast", testLast(scenario.build(), contents[2], Result.MatchingValue));
@@ -1041,7 +1040,6 @@ public class ListTester {
 			printTest(scenarioName + "_testRemove1", testRemoveIndex(scenario.build(), 1, contents[1], Result.MatchingValue));
 			printTest(scenarioName + "_testRemove2", testRemoveIndex(scenario.build(), 2, contents[2], Result.MatchingValue));
 			printTest(scenarioName + "_testRemove3", testRemoveIndex(scenario.build(), 3, null, Result.IndexOutOfBounds));
-
 			// Iterator tests
 			printTest(scenarioName + "_testIter", testIter(scenario.build(), Result.NoException));
 			printTest(scenarioName + "_testIterHasNext", testIterHasNext(scenario.build().iterator(), Result.True));
