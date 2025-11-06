@@ -271,48 +271,83 @@ public class IUDoubleLinkedList<T> implements IndexedUnsortedList<T> {
         throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
     }
     
-    private class DLLIterator implements Iterator<T> {
-		private Node<T> nextNode;
-		private int iterModCount;
-		private boolean canRemove = false;
 
+    private class DLLIterator implements ListIterator<T> {
+        private Node<T> nextNode;
+        private Node<T> lastReturnedNode;
+        private int iterModCount;
+        private int nextIndex;
+
+        /** Intitalizes the iterator before first element */
         public DLLIterator() {
-			nextNode = head;
-			iterModCount = modCount;
-			canRemove = false;
+            nextNode = head;
+            lastReturnedNode = null;
+            iterModCount = modCount;
+            nextIndex = 0;
         }
-        private void checkForComod() {
-        if (iterModCount != modCount) throw new ConcurrentModificationException();
-    	}
+
+        /** Intiialize iterator before the specificed index 
+        * @param startingIndex index that would be next after constructor
+        */
+        public DLLIterator(int startingIndex) {
+            // TODO Auto-generated constructor stub
+            throw new UnsupportedOperationException("Unimplemented constructor 'DLLIterator'");
+        }
+
+
 
         @Override
         public boolean hasNext() {
-            checkForComod();
-            canRemove = true;
-            return nextNode != null;
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
         }
 
         @Override
         public T next() {
-            checkForComod();
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            T retVal = nextNode.getElement();
-            nextNode = nextNode.getNextNode();
-            return retVal;
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'next'");
         }
-        
+
+        @Override
+        public boolean hasPrevious() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'hasPrevious'");
+        }
+
+        @Override
+        public T previous() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'previous'");
+        }
+
+        @Override
+        public int nextIndex() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'nextIndex'");
+        }
+
+        @Override
+        public int previousIndex() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'previousIndex'");
+        }
+
+        @Override
         public void remove() {
-            if (!canRemove) {
-                throw new IllegalStateException();
-            }
-            checkForComod();
-            Node<T> nodeToRemove = nextNode.getPrevNode();
-            nodeToRemove.getPrevNode().setNextNode(nodeToRemove.getNextNode());
-            nodeToRemove.getNextNode().setPrevNode(nodeToRemove.getPrevNode());
-            modCount++;
-            canRemove = false;
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        }
+
+        @Override
+        public void set(T e) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'set'");
+        }
+
+        @Override
+        public void add(T e) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'add'");
         }
     }
 }
