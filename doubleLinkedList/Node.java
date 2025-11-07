@@ -28,7 +28,7 @@ public class Node<T> {
     public Node(T element, Node<T> nextNode) {
         this.element = element;
         this.nextNode = nextNode;
-        this.PrevNode = PrevNode;
+        this.PrevNode = null;
     }
 
     public Node<T> getNextNode() {
@@ -46,12 +46,13 @@ public class Node<T> {
     public void setElement(T element) {
         this.element = element;
     }
+
      public Node<T> getPrevNode() {
         return PrevNode;
     }
 
     public void setPrevNode(Node<T> prevNode) {
-        this.PrevNode = PrevNode;
+        this.PrevNode = prevNode;
     }
 
 }
