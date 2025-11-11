@@ -281,14 +281,12 @@ public class IUDoubleLinkedList<T> implements IndexedUnsortedList<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+        return new DLLIterator();
     }
 
     @Override
     public ListIterator<T> listIterator(int startingIndex) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+        return new DLLIterator(startingIndex);
     }
     
 
@@ -311,60 +309,105 @@ public class IUDoubleLinkedList<T> implements IndexedUnsortedList<T> {
         * @param startingIndex index that would be next after constructor
         */
         public DLLIterator(int startingIndex) {
-            // TODO Auto-generated constructor stub
-            throw new UnsupportedOperationException("Unimplemented constructor 'DLLIterator'");
+            if (startingIndex < 0 || startingIndex > size) {
+                throw new IndexOutOfBoundsException();
+            }
+            if (startingIndex > size/2) {
+                if (startingIndex == size) {
+                    nextNode = null;
+                } else {
+                    nextNode = tail;
+                    for (int i = size -1; i > startingIndex; i--) {
+                        nextNode = nextNode.getPrevNode();
+                    }
+                }
+            } else {
+                nextNode = head;
+                nextIndex = 0;
+                for (int i = 0; i < startingIndex; i++) {
+                    nextNode = nextNode.getNextNode();
+                    nextIndex++;
+                }
+            }
+            iterModCount = modCount;
+            lastReturnedNode = null;
         }
-
+     
 		private void checkForComod() {
-        if (iterModCount != modCount) throw new ConcurrentModificationException();
+        if (iterModCount != modCount) 
+            throw new ConcurrentModificationException();
     	}
-
 
         @Override
         public boolean hasNext() {
-           	checkForComod();
-			canRemove = true;
-			return nextNode != null;
+            checkForComod();
+            return nextNode != null;
         }
 
         @Override
         public T next() {
-			if (!hasNext()) {
-				throw new NoSuchElementException();
-			}
-			T retVal = nextNode.getElement();
-			nextNode = nextNode.getNextNode();
-			return retVal;
+            if(!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T retVal = nextNode.getElement();
+            lastReturnedNode = nextNode;
+            nextNode = nextNode.getNextNode();
+            nextIndex++;
+            return retVal;
         }
 
         @Override
         public boolean hasPrevious() {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'hasPrevious'");
+           checkForComod();
+           return nextNode != head;
         }
 
         @Override
         public T previous() {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'previous'");
+            if (!hasPrevious()) {
+                throw new NoSuchElementException();
+            }
+            nextNode = nextNode.getPrevNode();
+            lastReturnedNode = nextNode;
+            nextIndex--;
+            return nextNode.getElement();
+
         }
 
         @Override
         public int nextIndex() {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'nextIndex'");
+            return nextIndex;
         }
 
         @Override
         public int previousIndex() {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'previousIndex'");
+            return nextIndex - 1;
         }
 
         @Override
         public void remove() {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'remove'");
+            checkForComod();
+            if (lastReturnedNode == null) {
+                throw new IllegalStateException();
+            }
+            //now I can remove lastReturnedNode
+            if (lastReturnedNode == tail) {
+                tail = lastReturnedNode.getPrevNode();
+            } else {
+            lastReturnedNode.getNextNode().setPrevNode(lastReturnedNode.getPrevNode());
+            }
+            if (lastReturnedNode == head) {
+                head = lastReturnedNode.getNextNode();
+            } else {
+            lastReturnedNode.getPrevNode().setNextNode(lastReturnedNode.getNextNode());
+            }
+            //handle if I just removed nextNode (last move was previous)
+            if (lastReturnedNode == nextNode) {
+                nextNode = nextNode.getNextNode();
+            } else {
+                nextIndex--;
+            }
+            lastReturnedNode = null;
         }
 
         @Override
