@@ -322,7 +322,6 @@ public class IUDoubleLinkedList<T> implements IndexedUnsortedList<T> {
         private Node<T> lastReturnedNode;
         private int iterModCount;
         private int nextIndex;
-        private boolean canRemove = false;
         private boolean lastMoveWasNext;
 
         /** Intitalizes the iterator before first element */

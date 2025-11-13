@@ -170,6 +170,7 @@ public class ListTester {
 		testSingleElementList(emptyList_addToRearA_A, "emptyList_addToRearA_A", LIST_A, STRING_A);
 		testSingleElementList(emptyList_addElementA_A, "emptyList_addElementA_A", LIST_A, STRING_A);
 		testSingleElementList(emptyList_addAtIndex0A_A,"emptyList_addAtIndex0A_A", LIST_A, STRING_A);
+		testSingleElementList(emptyList_ListIterAddA_A, "emptyList_ListIterAddA_A", LIST_A, STRING_A);
 		testTwoElementList(A_addToFrontB_BA, "A_addToFrontB_BA", LIST_BA, STRING_BA);
 		testTwoElementList(A_addToRearB_AB, "A_addToRearB_AB", LIST_AB, STRING_AB);
 		testTwoElementList(A_addAfterB_AB, "A_addAfterB_AB", LIST_AB, STRING_AB);
@@ -180,12 +181,8 @@ public class ListTester {
 		testEmptyList(A_removeLast_emptyList,"A_removeLast_emptyList");
 		testEmptyList(A_removeElementA_emptyList, "A_removeElementA_emptyList");
 		testEmptyList(A_removeIndex0_emptyList, "A_removeIndex0_emptyList");
+		testEmptyList(A_ListIterRemoveAfterPrevious_emptyList, "A_ListIterRemoveAfterPrevious_emptyList");
 		testSingleElementList(A_set0toB_B, "A_set0toB_B", LIST_B, STRING_B);
-		testSingleElementList(A_ListIterSetB_B, "A_ListIterSetB_B", LIST_B, STRING_B);
-		testSingleElementList(A_ListIterSetBAfterPrevious_B, "A_ListIterSetBAfterPrevious_B", LIST_B, STRING_B);
-		testThreeElementList(AB_ListIterAddC_CAB, "AB_ListIterAddC_CAB", LIST_CAB, STRING_CAB);
-		testThreeElementList(AB_ListIterAddC_ACB, "AB_ListIterAddC_ACB", LIST_ACB, STRING_ACB);
-		testThreeElementList(AB_ListIterAddC_ABC, "AB_ListIterAddC_ABC", LIST_ABC, STRING_ABC);
 		testThreeElementList(AB_addToFrontC_CAB, "AB_addToFrontC_CAB", LIST_CAB, STRING_CAB);
 		testThreeElementList(AB_addToRearC_ABC, "AB_addToRearC_ABC", LIST_ABC, STRING_ABC);
 		testThreeElementList(AB_addAfterA_C_ACB, "AB_addAfterA_C_ACB", LIST_ACB, STRING_ACB);
@@ -197,17 +194,11 @@ public class ListTester {
 		testSingleElementList(AB_removeFirst_B, "AB_removeFirst_B", LIST_B, STRING_B);
 		testSingleElementList(AB_removeLast_A, "AB_removeLast_A", LIST_A, STRING_A);
 		testSingleElementList(AB_removeElementA_B, "AB_removeElementA_B", LIST_B, STRING_B);
-		testSingleElementList(AB_ListIterRemove_B, "AB_ListIterRemove_B", LIST_B, STRING_B);
-		testSingleElementList(AB_ListIterRemove_A, "AB_ListIterRemove_A", LIST_A, STRING_A);
 		testSingleElementList(AB_removeElementB_A, "AB_removeElementB_A", LIST_A, STRING_A);
 		testSingleElementList(AB_removeIndex0_B, "AB_removeIndex0_B", LIST_B, STRING_B);
 		testSingleElementList(AB_removeIndex1_A, "AB_removeIndex1_A", LIST_A, STRING_A);
 		testTwoElementList(AB_set1C_AC, "AB_set1C_AC", LIST_AC, STRING_AC);
 		testTwoElementList(AB_set0C_CB, "AB_set0C_CB", LIST_CB, STRING_CB);
-		testTwoElementList(AB_ListIterSetC_CB, "AB_ListIterSetC_CB", LIST_CB, STRING_CB);
-		testTwoElementList(AB_ListIterSetC_AC, "AB_ListIterSetC_AC", LIST_AC, STRING_AC);
-		testTwoElementList(AB_ListIterSetCAfterPrevious_CB, "AB_ListIterSetCAfterPrevious_CB", LIST_CB, STRING_CB);
-		testTwoElementList(AB_ListIterSetCAfterPrevious_B_AC, "AB_ListIterSetCAfterPrevious_B_AC", LIST_AC, STRING_AC);
 		testTwoElementList(ABC_removeFirst_BC, "ABC_removeFirst_BC", LIST_BC, STRING_BC);
 		testTwoElementList(ABC_removeLast_AB, "ABC_removeLast_AB", LIST_AB, STRING_AB);
 		testTwoElementList(ABC_removeElementC_AB, "ABC_removeElementC_AB", LIST_AB, STRING_AB);
@@ -219,15 +210,28 @@ public class ListTester {
 		testThreeElementList(ABC_set0D_DBC, "ABC_set0D_DBC", LIST_DBC, STRING_DBC);
 		testThreeElementList(ABC_set1D_ADC, "ABC_set1D_ADC", LIST_ADC, STRING_ADC);
 		testThreeElementList(ABC_set2D_ABD, "ABC_set2D_ABD", LIST_ABD, STRING_ABD);
-		testThreeElementList(ABC_ListIterSetD_ABD, "ABC_ListIterSetD_ABD", LIST_ABD, STRING_ABD);
-		testThreeElementList(ABC_ListIterSetD_ADC, "ABC_ListIterSetD_ADC", LIST_ADC, STRING_ADC);
-		testThreeElementList(ABC_ListIterSetD_DBC, "ABC_ListIterSetD_DBC", LIST_DBC, STRING_DBC);
 		testEmptyList(A_IterRemoveA_emptyList, "A_IterRemoveA_emptyList");
 		testSingleElementList(AB_IterRemoveA_B, "AB_IterRemoveA_B", LIST_B, STRING_B);
 		testSingleElementList(AB_IterRemoveB_A, "AB_IterRemoveB_A", LIST_A, STRING_A);
 		testTwoElementList(ABC_IterRemoveA_BC, "ABC_IterRemoveA_BC", LIST_BC, STRING_BC);
 		testTwoElementList(ABC_IterRemoveB_AC, "ABC_IterRemoveB_AC", LIST_AC, STRING_AC);
 		testTwoElementList(ABC_IterRemoveC_AB, "ABC_IterRemoveC_AB", LIST_AB, STRING_AB);
+		testEmptyList(A_removeIndex0_emptyList, "A_removeIndex0_emptyList");
+		testEmptyList(A_ListIterRemoveAfterPrevious_emptyList, "A_ListIterRemoveAfterPrevious_emptyList");	
+		testTwoElementList(AB_ListIterSetC_CB, "AB_ListIterSetC_CB", LIST_CB, STRING_CB);
+		testTwoElementList(AB_ListIterSetC_AC, "AB_ListIterSetC_AC", LIST_AC, STRING_AC);
+		testTwoElementList(AB_ListIterSetCAfterPrevious_CB, "AB_ListIterSetCAfterPrevious_CB", LIST_CB, STRING_CB);
+		testTwoElementList(AB_ListIterSetCAfterPrevious_B_AC, "AB_ListIterSetCAfterPrevious_B_AC", LIST_AC, STRING_AC);
+		testThreeElementList(ABC_ListIterSetD_ABD, "ABC_ListIterSetD_ABD", LIST_ABD, STRING_ABD);
+		testThreeElementList(ABC_ListIterSetD_ADC, "ABC_ListIterSetD_ADC", LIST_ADC, STRING_ADC);
+		testThreeElementList(ABC_ListIterSetD_DBC, "ABC_ListIterSetD_DBC", LIST_DBC, STRING_DBC);
+		testSingleElementList(AB_ListIterRemove_B, "AB_ListIterRemove_B", LIST_B, STRING_B);
+		testSingleElementList(AB_ListIterRemove_A, "AB_ListIterRemove_A", LIST_A, STRING_A);
+		testSingleElementList(A_ListIterSetB_B, "A_ListIterSetB_B", LIST_B, STRING_B);
+		testSingleElementList(A_ListIterSetBAfterPrevious_B, "A_ListIterSetBAfterPrevious_B", LIST_B, STRING_B);
+		testThreeElementList(AB_ListIterAddC_CAB, "AB_ListIterAddC_CAB", LIST_CAB, STRING_CAB);
+		testThreeElementList(AB_ListIterAddC_ACB, "AB_ListIterAddC_ACB", LIST_ACB, STRING_ACB);
+		testThreeElementList(AB_ListIterAddC_ABC, "AB_ListIterAddC_ABC", LIST_ABC, STRING_ABC);
 		
 		// concurrency tests
 		test_IterConcurrency();
@@ -319,6 +323,31 @@ public class ListTester {
 		return list;
 	}
 	private Scenario<Integer> A_removeIndex0_emptyList = () -> A_removeIndex0_emptyList();
+
+	/** Scenario: [A] -> listIterator().previous().remove() -> [ ] 
+	 * @return [ ] after listIterator().previous().remove()
+	 */
+	private IndexedUnsortedList<Integer> A_ListIterRemoveAfterPrevious_emptyList() {
+		IndexedUnsortedList<Integer> list = emptyList_addToFrontA_A();
+		ListIterator<Integer> iter = list.listIterator();
+		iter.next();
+		iter.remove();
+		return list;
+	}
+	private Scenario<Integer> A_ListIterRemoveAfterPrevious_emptyList = () -> A_ListIterRemoveAfterPrevious_emptyList();
+
+	/** Scenario: [] -> listIterator Add A -> [A] 
+	 * @return [A] after listIterator Add A
+	 */
+	private IndexedUnsortedList<Integer> emptyList_ListIterAddA_A() {
+		IndexedUnsortedList<Integer> list = newList();
+		ListIterator<Integer> iter = list.listIterator();
+		iter.add(ELEMENT_A);
+		return list;
+	}
+	private Scenario<Integer> emptyList_ListIterAddA_A = () -> emptyList_ListIterAddA_A();
+
+
 
 	/** Scenario: empty list -> addToFront(A) -> [A] 
 	 * @return [A] after addToFront(A)
