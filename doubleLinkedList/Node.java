@@ -54,5 +54,4 @@ public class Node<T> {
     public void setPrevNode(Node<T> prevNode) {
         this.PrevNode = prevNode;
     }
-
 }
