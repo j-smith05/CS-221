@@ -1,5 +1,5 @@
 ****************
-* DoubleLinkedList / ListTester
+* DoubleLinkedList/List Tester
 * CS 221 - Computer Science II
 * 11/15/25
 * Jacob Smith
@@ -63,14 +63,6 @@ scanning through the whole list.
 
 TESTING:
 
- How did you test your program to be sure it works and meets all of the
- requirements? What was the testing strategy? What kinds of tests were run?
- Can your program handle bad input? Is your program  idiot-proof? How do you 
- know? What are the known issues / bugs remaining in your program?
-
-
-DISCUSSION:
-
 I tested my program mainly using the ListTester class that came with the 
 project, but I was also updating and checking things as I went. Every time 
 I finished a new part of the list or the iterator, I would re-run the 
@@ -96,11 +88,51 @@ At this point, all of the ListTester scenarios pass, and I’m not
 aware of any remaining bugs. If anything was still wrong, it would 
 probably be in a really specific iterator edge case, but based on 
 the final test results, the program meets the requirements.
+
+
+DISCUSSION:
  
+One of the biggest issues I ran into while working on this project 
+was figuring out how the iterator was supposed to behave. At first, 
+I kept running into problems where the iterator’s nextNode or 
+lastReturnedNode wasn’t what I expected, which caused all kinds of 
+weird errors—everything from NullPointerExceptions to 
+IllegalStateExceptions popping up in the tester. I realized pretty 
+quickly that I didn’t fully understand the rules behind how Java’s 
+ListIterator is supposed to work, so I had to spend some time looking 
+things up and reading through examples to get a better idea of what was going on.
+
+Another thing that gave me trouble was handling all the edge cases 
+with the list pointers. Removing the head, removing the tail, removing 
+the only element in the entire list—pretty much all of those situations 
+broke at least once while I was developing. Usually it came down to a 
+small pointer mistake, like forgetting to update a prev link or missing 
+a case where the list becomes empty.
+
+I also ran into issues where I forgot to update modCount, which caused 
+the fail-fast behavior to break and made iterator tests fail even though 
+the list itself looked correct. That’s when I learned how important it 
+is to make sure every structural change updates modCount.
+
+A lot of the errors I saw were things like nodes getting skipped, the 
+iterator being off by one, or remove() or set() throwing errors because 
+I wasn’t tracking the iterator’s state correctly. Most of the time, the 
+fixes came from slowing down and walking through what the iterator was 
+actually pointing at before and after each method call.
+
+The hardest part for me was definitely getting the iterator to behave 
+exactly right. But eventually, after breaking it enough times, the 
+logic finally started to click. I had that moment where I suddenly 
+understood why next() and previous() change different pointers, and why 
+remove() depends so much on lastReturnedNode. Once that clicked, the 
+rest of the debugging went a lot smoother.
+
+Overall, this project really helped me understand double-linked lists 
+and iterators in a more hands-on way than just reading about them.
  
 EXTRA CREDIT:
 
-Not applicable for this assignment.
+Not applicable for this assignment
 
 
 ----------------------------------------------------------------------------
