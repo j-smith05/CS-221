@@ -46,7 +46,7 @@ The main class, IUDoubleLinkedList, handles all list operations such as adding, 
 and setting elements. It also keeps track of the list’s size and updates a modCount value so the 
 iterator can detect when the list has been changed illegally during iteration.
 
-The program also includes an inner class called DLLIterator, which implements a full ListIterator. 
+The program also includes a private inner class called DLLIterator, which implements a full ListIterator. 
 This iterator can move forward and backward, add new elements at its current position, remove the 
 last element it returned, and update elements. To do this correctly, it keeps track of its current 
 position using pointers like nextNode and lastReturnedNode, and it checks modCount to make sure the 
@@ -63,7 +63,7 @@ scanning through the whole list.
 
 TESTING:
 
-I tested my program mainly using the ListTester class that came with the 
+I tested my program mainly using the ListTester file that came with the 
 project, but I was also updating and checking things as I went. Every time 
 I finished a new part of the list or the iterator, I would re-run the 
 tester to see what passed and what broke. This helped me catch problems 
@@ -89,7 +89,6 @@ aware of any remaining bugs. If anything was still wrong, it would
 probably be in a really specific iterator edge case, but based on 
 the final test results, the program meets the requirements.
 
-
 DISCUSSION:
  
 One of the biggest issues I ran into while working on this project 
@@ -100,7 +99,8 @@ weird errors—everything from NullPointerExceptions to
 IllegalStateExceptions popping up in the tester. I realized pretty 
 quickly that I didn’t fully understand the rules behind how Java’s 
 ListIterator is supposed to work, so I had to spend some time looking 
-things up and reading through examples to get a better idea of what was going on.
+things up and reading through examples to get a better idea of what 
+was going on.
 
 Another thing that gave me trouble was handling all the edge cases 
 with the list pointers. Removing the head, removing the tail, removing 
@@ -132,8 +132,7 @@ and iterators in a more hands-on way than just reading about them.
  
 EXTRA CREDIT:
 
-Not applicable for this assignment
-
+Not applicable for this assignment.
 
 ----------------------------------------------------------------------------
 
