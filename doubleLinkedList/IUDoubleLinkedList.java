@@ -7,7 +7,8 @@ import java.util.NoSuchElementException;
 /**
  * Double-linked node-based implementation of IndexedUnsortedList.
  * Supports a fully-functional ListIterator in addition to basic 
- * Iterator and ListIterator operations. 
+ * Iterator and ListIterator operations. Also supports all IndexedUnsortedList
+ * operations. 
  * @author Jacob Smith
  */
 

@@ -19,7 +19,7 @@ Node.java – Defines the node structure used to store elements and next/previou
 IndexedUnsortedList.java – Interface specifying all methods the list must support.
 ListTester.java – Automated test suite that validates the list across hundreds of scenarios.
 GoodList.java, BadList.java, ArrayList.java, SingleLinkedList.java – Reference and comparison implementations used by the tester.
-README.txt – This documentation file explaining how to compile, run, and understand the program.
+README.txt (Current File) – This file explaining how to compile, run, and understand the program.
 
 COMPILING AND RUNNING:
 
