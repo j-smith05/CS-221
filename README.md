@@ -66,6 +66,17 @@ Extensively tested using the `ListTester` to ensure iterator correctness and lis
 
 ---
 
+### Mergesort
+TBD
+  
+---
+
+### CircuitTracer
+
+Final Project CS 221
+
+---
+
 ## 🛠️ Technologies Used
 - **Java**
 - **JUnit Testing**
