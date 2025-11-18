@@ -18,7 +18,10 @@ IUDoubleLinkedList.java – Implements the double-linked list and all required l
 Node.java – Defines the node structure used to store elements and next/previous links.
 IndexedUnsortedList.java – Interface specifying all methods the list must support.
 ListTester.java – Automated test suite that validates the list across hundreds of scenarios.
-GoodList.java, BadList.java, ArrayList.java, SingleLinkedList.java – Reference and comparison implementations used by the tester.
+GoodList.java - Reference and comparison implementations used by the tester.
+BadList.java - Reference and comparison implementations used by the tester.
+ArrayList.java - Reference and comparison implementations used by the tester.
+SingleLinkedList.java – Reference and comparison implementations used by the tester.
 README.txt (Current File) – This file explaining how to compile, run, and understand the program.
 
 COMPILING AND RUNNING:
@@ -37,29 +40,34 @@ The program will execute all test scenarios and print the results to the console
 
 PROGRAM DESIGN AND IMPORTANT CONCEPTS:
 
-This program is built around a double-linked list that stores elements in nodes that point both 
-forward and backward. The main idea is to keep track of the first and last nodes (the head and tail) 
-so the list can add or remove elements efficiently at either end. Each element is stored in a small 
+This program is built around a double-linked list that stores elements 
+in nodes that point both forward and backward. The main idea is to keep 
+track of the first and last nodes (the head and tail) so the list can add 
+or remove elements efficiently at either end. Each element is stored in a small 
 Node object that holds the value plus links to the next and previous nodes.
 
-The main class, IUDoubleLinkedList, handles all list operations such as adding, removing, getting, 
-and setting elements. It also keeps track of the list’s size and updates a modCount value so the 
-iterator can detect when the list has been changed illegally during iteration.
+The main class, IUDoubleLinkedList, handles all list operations such as adding, 
+removing, getting, and setting elements. It also keeps track of the list’s size 
+and updates a modCount value so the iterator can detect when the list has been 
+changed illegally during iteration.
 
-The program also includes a private inner class called DLLIterator, which implements a full ListIterator. 
-This iterator can move forward and backward, add new elements at its current position, remove the 
-last element it returned, and update elements. To do this correctly, it keeps track of its current 
-position using pointers like nextNode and lastReturnedNode, and it checks modCount to make sure the 
-list hasn’t been modified outside the iterator.
+The program also includes a private inner class called DLLIterator, which 
+implements a full ListIterator. This iterator can move forward and backward, 
+add new elements at its current position, remove the last element it returned, 
+and update elements. To do this correctly, it keeps track of its current 
+position using pointers like nextNode and lastReturnedNode, and it checks modCount
+to make sure the list hasn’t been modified outside the iterator.
 
-The IndexedUnsortedList interface defines what methods the list is required to support, and the ListTester 
-class uses that interface to run a large number of tests on the implementation. The tester checks basic list 
-operations, iterator behavior, exception handling, and many edge cases.
+The IndexedUnsortedList interface defines what methods the list is required to 
+support, and the ListTester class uses that interface to run a large number of 
+tests on the implementation. The tester checks basic list  operations, iterator 
+behavior, exception handling, and many edge cases.
 
-This design works well for a double-linked list because it makes adding and removing nodes straightforward 
-once the iterator is in the right place. If I were to improve anything, I might add “dummy” head and tail 
-nodes to reduce special-case code, or look into speeding up index-based operations so they don’t require 
-scanning through the whole list.
+This design works well for a double-linked list because it makes adding and 
+removing nodes straightforward once the iterator is in the right place. If 
+I were to improve anything, I might add “dummy” head and tail  nodes to reduce 
+special-case code, or look into speeding up index-based operations so they 
+don’t require scanning through the whole list.
 
 TESTING:
 
