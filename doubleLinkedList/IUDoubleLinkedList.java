@@ -310,6 +310,7 @@ public class IUDoubleLinkedList<T> implements IndexedUnsortedList<T> {
         private int nextIndex;
         private boolean lastMoveWasNext;
 
+
         /** Intitalizes the iterator before first element */
         public DLLIterator() {
             nextNode = head;

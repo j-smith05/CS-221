@@ -1233,6 +1233,8 @@ public class ListTester {
 	private Scenario<Integer> ABC_ListIterSetDafterPrevious_DBC = () -> ABC_ListIterSetDafterPrevious_DBC();
 
 
+
+
 	/////////////////////////////////
 	//XXX Tests for 0-element list
 	/////////////////////////////////
@@ -1415,6 +1417,7 @@ public class ListTester {
 			printTest(scenarioName + "_testListIter1PreviousNextRemove", testIterRemove(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), Result.NoException));
 			printTest(scenarioName + "_testListIter1PreviousNextAdd", testListIterAdd(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));			
 			printTest(scenarioName + "_testListIter1PreviousNextSet", testListIterSet(listIterAfterNext(listIterAfterPrevious(scenario.build().listIterator(1), 1), 1), ELEMENT_X, Result.NoException));
+			printTest(scenarioName + "_testListIterNextSetSet", testListIterSet(listIterAfterSet(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X), ELEMENT_Z, Result.NoException));
 		} else {
 			printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.UnsupportedOperation));
 			printTest(scenarioName + "_testListIter0", testListIter(scenario.build(), 0, Result.UnsupportedOperation));
@@ -1538,6 +1541,7 @@ public class ListTester {
 			printTest(scenarioName + "_testListIter1PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(1), 1), Result.NoException));
 			printTest(scenarioName + "_testListIter1PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));
 			printTest(scenarioName + "_testListIter1PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(1), 1), ELEMENT_X, Result.NoException));
+			printTest(scenarioName + "_testListIterNextSetSet", testListIterSet(listIterAfterSet(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X), ELEMENT_Z, Result.NoException));
 		} else {
 				printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.UnsupportedOperation));
 				printTest(scenarioName + "_testListIter0", testListIter(scenario.build(), 0, Result.UnsupportedOperation));
@@ -1699,6 +1703,7 @@ public class ListTester {
 			printTest(scenarioName + "_testListIter3PreviousRemove", testIterRemove(listIterAfterPrevious(scenario.build().listIterator(3), 1), Result.NoException));
 			printTest(scenarioName + "_testListIter3PreviousAdd", testListIterAdd(listIterAfterPrevious(scenario.build().listIterator(3), 1), ELEMENT_X, Result.NoException));
 			printTest(scenarioName + "_testListIter3PreviousSet", testListIterSet(listIterAfterPrevious(scenario.build().listIterator(3), 1), ELEMENT_X, Result.NoException));
+			printTest(scenarioName + "_testListIterNextSetSet", testListIterSet(listIterAfterSet(listIterAfterNext(scenario.build().listIterator(), 1), ELEMENT_X), ELEMENT_Z, Result.NoException));			
 		} else {
 			printTest(scenarioName + "_testListIter", testListIter(scenario.build(), Result.UnsupportedOperation));
 			printTest(scenarioName + "_testListIter0", testListIter(scenario.build(), 0, Result.UnsupportedOperation));
@@ -2563,6 +2568,17 @@ public class ListTester {
 		iterator.remove();
 		return iterator;
 	}
+
+		/** Helper for testing ListIterators. Return a ListIterator that has had remove() called once.
+	 * @param iterator
+	 * @return same Iterator following a call to set()
+	 */
+	private ListIterator<Integer> listIterAfterSet(ListIterator<Integer> iterator, Integer element) {
+		iterator.set(element);
+		return iterator;
+	}
+
+
 
 	////////////////////////////////////////////////////////
 	// XXX Iterator Concurrency Tests
