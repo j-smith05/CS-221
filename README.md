@@ -66,12 +66,12 @@ Extensively tested using the `ListTester` to ensure iterator correctness and lis
 
 ---
 
-### Mergesort
+### ⛙ Mergesort
 TBD
   
 ---
 
-### CircuitTracer
+### ⚙️ CircuitTracer
 
 Final Project CS 221
 
