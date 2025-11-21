@@ -459,7 +459,7 @@ public class IUDoubleLinkedList<T> implements IndexedUnsortedList<T> {
             lastReturnedNode.setElement(e);
             modCount++;
             iterModCount++;
-            lastReturnedNode = null;
+            // lastReturnedNode = null;  // Uncommenting this would create issues in consecutive sets
         }
 
         @Override
