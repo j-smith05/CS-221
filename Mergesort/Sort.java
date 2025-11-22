@@ -68,7 +68,12 @@ public class Sort
 	 */
 	private static <T extends Comparable<T>> void mergesort(IndexedUnsortedList<T> list)
 	{
-		// TODO: Implement recursive mergesort algorithm 
+		sort(list, new Comparator<T>() {
+			@Override
+			public int compare(T o1, T o2) {
+				return o1.compareTo(o2);
+			}
+		});
 	}
 		
 	/**
@@ -86,8 +91,41 @@ public class Sort
 	 */
 	private static <T> void mergesort(IndexedUnsortedList<T> list, Comparator<T> c)
 	{
-		// TODO: Implement recursive mergesort algorithm using Comparator
-
+		int size = list.size();
+		if (size <= 1) {
+			return; // List is already sorted
+		}
+		
+		// Split the list into two halves
+		IndexedUnsortedList<T> left = newList();
+		IndexedUnsortedList<T> right = newList();
+		
+		for (int i = 0; i < size / 2; i++) {
+			left.addToRear(list.removeFirst());
+		}
+		while (list.size() > 0) {
+			right.addToRear(list.removeFirst());
+		}
+		
+		// Recursively sort both halves
+		mergesort(left, c);
+		mergesort(right, c);
+		
+		// Merge the sorted halves back into the original list
+		while (left.size() > 0 && right.size() > 0) {
+			if (c.compare(left.first(), right.first()) <= 0) {
+				list.addToRear(left.removeFirst());
+			} else {
+				list.addToRear(right.removeFirst());
+			}
+		}
+		
+		while (left.size() > 0) {
+			list.addToRear(left.removeFirst());
+		}
+		
+		while (right.size() > 0) {
+			list.addToRear(right.removeFirst());
+		}
 	}
-	
 }
