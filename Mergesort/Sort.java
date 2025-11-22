@@ -5,7 +5,7 @@ import java.util.Comparator;
  * using ordering defined by class of objects in list or a Comparator.
  * As written uses Mergesort algorithm.
  *
- * @author CS221
+ * @author CS221 & Jacob Smith
  */
 public class Sort
 {	
@@ -18,7 +18,7 @@ public class Sort
 	 */
 	private static <T> IndexedUnsortedList<T> newList() 
 	{
-		return new WrappedDLL<T>(); //TODO: replace with your IUDoubleLinkedList for extra-credit
+		return new IUDoubleLinkedList<T>(); //TODO: replace with your IUDoubleLinkedList for extra-credit
 	}
 	
 	/**
@@ -70,7 +70,7 @@ public class Sort
 	{
 		sort(list, new Comparator<T>() {
 			@Override
-			public int compare(T o1, T o2) {
+			public int compare(T o1, T o2) { // Use compareTo method of T
 				return o1.compareTo(o2);
 			}
 		});
@@ -119,7 +119,8 @@ public class Sort
 				list.addToRear(right.removeFirst());
 			}
 		}
-		
+
+		// Append any remaining elements from either half
 		while (left.size() > 0) {
 			list.addToRear(left.removeFirst());
 		}
