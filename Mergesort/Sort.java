@@ -100,6 +100,7 @@ public class Sort
 		IndexedUnsortedList<T> left = newList();
 		IndexedUnsortedList<T> right = newList();
 		
+		// Distribute elements to left and right lists
 		for (int i = 0; i < size / 2; i++) {
 			left.addToRear(list.removeFirst());
 		}

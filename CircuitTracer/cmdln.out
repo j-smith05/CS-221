@@ -1,0 +1,10 @@
+To Run The Program Please Follow The Following Argument Structure:
+<-StorageType> <-ProgramMode> <InputFileName>
+Storage Type Options:
+-s -- uses a stack, DFS
+-q -- uses a queue, BFS
+Program Mode Options:
+-c -- runs program in the console
+-g -- runs program in a GUI
+Example:
+java CircuitTracer -s -c inputFile.dat

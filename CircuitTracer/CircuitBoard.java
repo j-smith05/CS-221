@@ -42,18 +42,87 @@ public class CircuitBoard {
 	 * @throws FileNotFoundException if Scanner cannot open or read the file
 	 * @throws InvalidFileFormatException for any file formatting or content issue
 	 */
-	public CircuitBoard(String filename) throws FileNotFoundException {
-		Scanner fileScan = new Scanner(new File(filename));
-		
-		//TODO: parse the given file to populate the char[][]
-		// throw FileNotFoundException if Scanner cannot read the file
-		// throw InvalidFileFormatException if any issues are encountered while parsing the file
-		
-		ROWS = 0; //replace with initialization statements using values from file
-		COLS = 0;
-		
-		fileScan.close();
-	}
+public CircuitBoard(String filename) throws FileNotFoundException {
+    Scanner fileScan = new Scanner(new File(filename));
+    
+    try {
+        if (!fileScan.hasNextInt()) {
+            throw new InvalidFileFormatException("First line must contain number of rows and columns.");
+        }
+        int rows = fileScan.nextInt();
+
+        if (!fileScan.hasNextInt()) {
+            throw new InvalidFileFormatException("First line must contain two integers: rows and columns.");
+        }
+        int cols = fileScan.nextInt();
+
+        if (rows <= 0 || cols <= 0) {
+            throw new InvalidFileFormatException("Rows and columns must be positive.");
+        }
+
+        ROWS = rows;
+        COLS = cols;
+
+        if (fileScan.hasNextLine()) {
+            fileScan.nextLine();
+        }
+
+        board = new char[ROWS][COLS];
+        int startCount = 0;
+        int endCount = 0;
+
+        for (int r = 0; r < ROWS; r++) {
+            if (!fileScan.hasNextLine()) {
+                throw new InvalidFileFormatException("Not enough rows of board data. Expected " + ROWS);
+            }
+
+            String line = fileScan.nextLine().trim().replaceAll("\\s+", "");
+
+            if (line.length() != COLS) {
+                throw new InvalidFileFormatException(
+                    "Row " + r + " has length " + line.length() + " but expected " + COLS
+                );
+            }
+
+            for (int c = 0; c < COLS; c++) {
+                char ch = line.charAt(c);
+
+                if (ALLOWED_CHARS.indexOf(ch) == -1) {
+                    throw new InvalidFileFormatException(
+                        "Invalid character '" + ch + "' at row " + r + ", col " + c
+                    );
+                }
+
+                if (ch == START) {
+                    startingPoint = new Point(r, c);
+                    startCount++;
+                } else if (ch == END) {
+                    endingPoint = new Point(r, c);
+                    endCount++;
+                }
+
+                board[r][c] = ch;
+            }
+        }
+
+        while (fileScan.hasNextLine()) {
+            if (!fileScan.nextLine().trim().isEmpty()) {
+                throw new InvalidFileFormatException("Extra data found after board rows.");
+            }
+        }
+
+        if (startCount != 1 || endCount != 1) {
+            throw new InvalidFileFormatException(
+                "Board must contain exactly one '" + START + "' and one '" + END + "'. " +
+                "Found " + startCount + " start(s), " + endCount + " end(s)."
+            );
+        }
+
+    } finally {
+        fileScan.close();
+    }
+}
+
 	
 	/** Copy constructor - duplicates original board
 	 * 
