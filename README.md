@@ -67,13 +67,15 @@ Extensively tested using the `ListTester` to ensure iterator correctness and lis
 ---
 
 ### ⛙ Mergesort
-TBD
+Implemented a generic Merge Sort algorithm in Java for custom indexed lists using both 
+Comparable and Comparator-based sorting with O(n log n) runtime.
   
 ---
 
 ### ⚙️ CircuitTracer
 
-Final Project CS 221
+Built a Java circuit pathfinding app using DFS and BFS to compute and display the 
+shortest valid paths from file-based board layouts.
 
 ---
 
