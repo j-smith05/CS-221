@@ -18,7 +18,7 @@ public class Sort
 	 */
 	private static <T> IndexedUnsortedList<T> newList() 
 	{
-		return new IUDoubleLinkedList<T>(); //TODO: replace with your IUDoubleLinkedList for extra-credit
+		return new IUDoubleLinkedList<T>();
 	}
 	
 	/**
@@ -68,12 +68,44 @@ public class Sort
 	 */
 	private static <T extends Comparable<T>> void mergesort(IndexedUnsortedList<T> list)
 	{
-		sort(list, new Comparator<T>() {
-			@Override
-			public int compare(T o1, T o2) { // Use compareTo method of T
-				return o1.compareTo(o2);
+		int size = list.size();
+		if (size <= 1) {
+			return; // List is already sorted
+		}
+		
+		// Split the list into two halves
+		IndexedUnsortedList<T> left = newList();
+		IndexedUnsortedList<T> right = newList();
+		
+		// Distribute elements to left and right lists
+		for (int i = 0; i < size / 2; i++) {
+			left.addToRear(list.removeFirst());
+		}
+		while (list.size() > 0) {
+			right.addToRear(list.removeFirst());
+		}
+		
+		// Recursively sort both halves
+		mergesort(left);
+		mergesort(right);
+		
+		// Merge the sorted halves back into the original list
+		while (left.size() > 0 && right.size() > 0) {
+			if (left.first().compareTo(right.first()) <= 0) {
+				list.addToRear(left.removeFirst());
+			} else {
+				list.addToRear(right.removeFirst());
 			}
-		});
+		}
+
+		// Append any remaining elements from either half
+		while (left.size() > 0) {
+			list.addToRear(left.removeFirst());
+		}
+		
+		while (right.size() > 0) {
+			list.addToRear(right.removeFirst());
+		}
 	}
 		
 	/**

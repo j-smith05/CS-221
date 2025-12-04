@@ -1,4 +1,4 @@
-To Run The Program Please Follow The Following Argument Structure:
+To Run The Program Please Follow The Following Input Structure:
 <-StorageType> <-ProgramMode> <InputFileName>
 Storage Type Options:
 -s -- uses a stack, DFS
