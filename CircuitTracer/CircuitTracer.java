@@ -49,7 +49,7 @@ public class CircuitTracer {
 			return;
 		}
 
-		// -------- storage selection --------
+		// ------- storage type selection --------
 		Storage<TraceState> stateStore;
 		if (args[0].equals("-s")) {
 			stateStore = Storage.getStackInstance();
@@ -60,7 +60,7 @@ public class CircuitTracer {
 			return;
 		}
 
-		// -------- output selection --------
+		// -------- output mode selection --------
 		if (args[1].equals("-g")) {
 			System.out.println("GUI not available.");
 			return;
@@ -69,7 +69,7 @@ public class CircuitTracer {
 			return;
 		}
 
-		// -------- read board --------
+		// Loads board from a file
 		CircuitBoard board;
 		try {
 			board = new CircuitBoard(args[2]);
@@ -81,7 +81,7 @@ public class CircuitTracer {
 			return;
 		}
 
-		// -------- initialize first search states --------
+		// Initializes search 
 		ArrayList<TraceState> bestPaths = new ArrayList<>();
 		int bestLength = Integer.MAX_VALUE;
 
@@ -94,7 +94,7 @@ public class CircuitTracer {
 		if (board.isOpen(r, c - 1)) stateStore.store(new TraceState(board, r, c - 1));
 		if (board.isOpen(r, c + 1)) stateStore.store(new TraceState(board, r, c + 1));
 
-		// -------- search loop --------
+		// Search for best paths
 		while (!stateStore.isEmpty()) {
 			TraceState current = stateStore.retrieve();
 
@@ -130,7 +130,8 @@ public class CircuitTracer {
 			}
 		}
 
-		// -------- output results --------
+		// Print best paths found
+		System.out.println("Best paths found (length " + bestLength + "):");
 		for (TraceState path : bestPaths) {
 			System.out.print(path);
 			System.out.println();
