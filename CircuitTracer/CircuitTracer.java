@@ -53,6 +53,7 @@ public class CircuitTracer {
 		Storage<TraceState> stateStore;
 		if (args[0].equals("-s")) {
 			stateStore = Storage.getStackInstance();
+			
 		} else if (args[0].equals("-q")) {
 			stateStore = Storage.getQueueInstance();
 		} else {
@@ -131,10 +132,8 @@ public class CircuitTracer {
 		}
 
 		// Print best paths found
-		System.out.println("Best paths found (length " + bestLength + "):");
 		for (TraceState path : bestPaths) {
-			System.out.print(path);
-			System.out.println();
+			System.out.println(path);
 		}
 	}
 }
