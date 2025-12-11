@@ -26,7 +26,7 @@ public class CircuitTracer {
 	/** Print instructions for running CircuitTracer from the command line. */
 	private void printUsage() {
 		System.out.println("To Run The Program Please Follow The Following Input Structure:");
-		System.out.println("<-StorageType> <-ProgramMode> <InputFileName>");
+		System.out.println("java CircuitTracer <-StorageType> <-ProgramMode> <InputFileName>");
 		System.out.println("Storage Type Options:");
 		System.out.println("-s -- uses a stack, DFS");
 		System.out.println("-q -- uses a queue, BFS");
@@ -40,7 +40,6 @@ public class CircuitTracer {
 	/** 
 	 * Set up the CircuitBoard and all other components based on command
 	 * line arguments.
-	 * 
 	 * @param args command line arguments passed through from main()
 	 */
 	public CircuitTracer(String[] args) {
@@ -49,7 +48,7 @@ public class CircuitTracer {
 			return;
 		}
 
-		// ------- storage type selection --------
+		// Selects storage type via command line argument
 		Storage<TraceState> stateStore;
 		if (args[0].equals("-s")) {
 			stateStore = Storage.getStackInstance();
@@ -61,7 +60,7 @@ public class CircuitTracer {
 			return;
 		}
 
-		// -------- output mode selection --------
+		// Selects program mode via command line argument
 		if (args[1].equals("-g")) {
 			System.out.println("GUI not available.");
 			return;

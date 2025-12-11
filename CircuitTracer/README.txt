@@ -36,7 +36,6 @@ Run the program using:
 $ java CircuitTracer <-StorageType> <-ProgramMode> <InputFileName>"
 
 Where:
-
 Storage Type Is: 
 -s uses stack-based storage
 -q uses queue-based Storage
@@ -48,7 +47,7 @@ Program Mode Is:
 InputFileName is:
 The file you wish to examine
 
-After execution, the console will display the discovered best path
+After execution, the console will display the discovered best the possible path(s).
 
 PROGRAM DESIGN AND IMPORTANT CONCEPTS:
 
@@ -56,40 +55,48 @@ This program is built around a search algorithm that explores possible paths
 through a grid-based circuit board. The design separates the search logic from 
 the storage behavior using a Storage interface, allowing the same search algorithm 
 to run with either a stack or a queue.
-The CircuitTracer class serves as the program driver. It processes command-line arguments, 
-loads the circuit board, selects the appropriate storage structure, and program mode and executes the search.
-The CircuitBoard class models the grid and handles obstacle detection and board bounds 
-checking. Each search step is represented using the TraceState class, which stores the current board 
-location and the full path taken so far.
-The main algorithm repeatedly removes a search state from Storage, checks if it matches 
-the goal, generates all valid neighboring moves, and adds new states back into Storage.
-Using a stack produces depth-first search behavior, while using a queue produces 
-breadth-first search behavior. This design allows both strategies to be tested without 
-changing the overall program logic.
-One possible improvement would be adding heuristic-based searching such as A* to improve performance on large boards.
+The CircuitTracer class serves as the program driver. It processes command-line 
+arguments, loads the circuit board, selects the appropriate storage structure, 
+and program mode and executes the search. The CircuitBoard class models the grid 
+and handles obstacle detection and board bounds checking. Each search step is 
+represented using the TraceState class, which stores the current board location 
+and the full path taken so far.
+The main algorithm repeatedly removes a search state from Storage, checks if it 
+matches the goal, generates all valid neighboring moves, and adds new states back 
+into Storage. Using a stack produces depth-first search behavior, while using a 
+queue produces breadth-first search behavior. This design allows both strategies 
+to be tested without changing the overall program logic.
+One possible improvement would be adding heuristic-based searching such as A* to 
+improve performance on large boards.
 
 TESTING:
 
-During development the provided tester was used to see where the program was 
-failing and incorrect. Once the program passed all the tests with expected, outputs
-was looked at manually to ensure the proper output was occuring and not missed. 
-The Tester and manual testing allowed for problems to be easily identifiable and by extension easy to fix. 
-For example, all tests were passing except for 12 ,it turned out that a part of my 
-text input which had an extra blank line in it was causing the fail. By removing that 
-section of text output I was able to pass all the test correctly.
+During development the provided tester was used to see where the code was 
+failing and incorrect. Once the program passed all the tests with expected, I 
+looked at the outputs manually to ensure the proper output was occuring and no 
+unseen erros were occuring. The Tester and manual testing allowed for problems 
+to be easily identified and then easy to fix. For example, all tests were 
+passing except for 12, it turned out that a part of my text input which had an 
+extra blank line in it was causing the fail. By removing that  section of text 
+output I was able to pass all the test correctly.
 
 DISCUSSION:
 
-One major challenge during development was correctly managing the Storage 
-behavior so that the same algorithm could work with both stacks and queues. 
-Another difficulty was preventing repeated paths and ensuring that backtracking worked correctly.
+One major challenge during development was correctly formatting the file. 
+I understood how the code to do it worked, but when developing I found myself
+having a surprising amount of difficulty getting the board to navigate correctly.
+I was able to finally fix my error after a lot of trial and error allowing for the
+board to be read correctly. These errors were simple addition, in my search of the 
+board I had swapped around a + or -. 
 
-Debugging involved using debugger following the tracing search paths step-by-step 
-and verifying that new states were being generated and stored correctly. 
-The biggest concept that finally “clicked” was seeing the real-world difference 
-between depth-first and breadth-first search in practice.
+Like stated early a lot of my errors came from not understanding the brute force
+searching. Once i was able to understand that, I was able to search through the 
+boards correctly, and output them. Which lead me to a new problem, the idea of my 
+working correctly but because I had extra spaces. Overall when using searching it 
+always has me thinking, and I feel like I always have the same struggle everytime 
+because I never truly understand it. 
 
-Analysis
+Analysis:
 
 How does the choice of Storage (stack vs. queue) affect how paths are explored?
 
