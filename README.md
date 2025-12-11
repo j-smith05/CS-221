@@ -7,7 +7,7 @@ Each folder represents a different assignment or lab focused on Java programming
 
 ## Assignment Overview
 
-### GridMonitor_files
+### GridMonitor
 A Java program that **reads input data** and constructs a **2D array** from it.  
 Used to analyze grid data and perform calculations across a dataset.
 
