@@ -32,12 +32,12 @@ Also includes a Word document explaining the assignment and results.
 
 ---
 
-### lists1
+### Lists1
 Contains a planning `.txt` file outlining **test scenarios** for future implementation in `ListTester.java`.
 
 ---
 
-### lists2
+### Lists2
 Implements the **ListTester** described in `lists1`.  
 Tests are run against:
 - `GoodList.java` → passes most tests  
