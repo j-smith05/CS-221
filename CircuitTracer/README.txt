@@ -1,10 +1,9 @@
 ****************
 * CircuitTracer
-* CS 221
+* CS 221 - Computer Science II
 * 12/10/2025
 * Jacob Smith
 ****************
-
 
 OVERVIEW:
 
@@ -13,6 +12,8 @@ which is then read by a scanner. Once read, the program performs a BruteForce
 search which searches through every possible paths and then prints or displays 
 the best found solution(s). These paths are depicted by T's which are used 
 to connect 1 (beginning of path) and 2 (end of path) on the board.
+
+------------------------------------------------------------
 
 INCLUDED FILES:
 
@@ -25,13 +26,15 @@ INCLUDED FILES:
  * TraceState.java - Program that is used to trace each path as the program searches for the best solution(s). 
  * README - this file
 
+------------------------------------------------------------
+
 COMPILING AND RUNNING:
 
 From the directory containing all source files, compile the program using:
 
 $ javac CircuitTracer.java
 
-Run the program using:
+Once you've complied, run the following the: 
 
 $ java CircuitTracer <-StorageType> <-ProgramMode> <InputFileName>"
 
@@ -49,6 +52,8 @@ The file you wish to examine
 
 After execution, the console will display the discovered best the possible path(s).
 
+------------------------------------------------------------
+
 PROGRAM DESIGN AND IMPORTANT CONCEPTS:
 
 This program is built around a search algorithm that explores possible paths 
@@ -57,7 +62,8 @@ the storage behavior using a Storage interface, allowing the same search algorit
 to run with either a stack or a queue.
 The CircuitTracer class serves as the program driver. It processes command-line 
 arguments, loads the circuit board, selects the appropriate storage structure, 
-and program mode and executes the search. The CircuitBoard class models the grid 
+and program mode and executes the BruteForce search. A BruteForce search is when
+the program executres every possible path. The CircuitBoard class models the grid 
 and handles obstacle detection and board bounds checking. Each search step is 
 represented using the TraceState class, which stores the current board location 
 and the full path taken so far.
@@ -65,20 +71,23 @@ The main algorithm repeatedly removes a search state from Storage, checks if it
 matches the goal, generates all valid neighboring moves, and adds new states back 
 into Storage. Using a stack produces depth-first search behavior, while using a 
 queue produces breadth-first search behavior. This design allows both strategies 
-to be tested without changing the overall program logic.
-One possible improvement would be adding heuristic-based searching such as A* to 
-improve performance on large boards.
+to be tested without changing the overall program logic. While running a Queue 
+is likely to compile and run faster, due to it searching the most file quickly.
+
+------------------------------------------------------------
 
 TESTING:
 
 During development the provided tester was used to see where the code was 
 failing and incorrect. Once the program passed all the tests with expected, I 
 looked at the outputs manually to ensure the proper output was occuring and no 
-unseen erros were occuring. The Tester and manual testing allowed for problems 
-to be easily identified and then easy to fix. For example, all tests were 
-passing except for 12, it turned out that a part of my text input which had an 
-extra blank line in it was causing the fail. By removing that  section of text 
-output I was able to pass all the test correctly.
+unseen erros were occuring. The Tester and manual testing which was compeleted 
+allowed for problems to be easily identified and then easy to fix. For example, 
+all tests were passing except for 12, it turned out that a part of my text input 
+which had an extra blank line in it was causing the fail. By removing that 
+section of text output I was able to pass all the test correctly.
+
+------------------------------------------------------------
 
 DISCUSSION:
 
@@ -95,6 +104,8 @@ boards correctly, and output them. Which lead me to a new problem, the idea of m
 working correctly but because I had extra spaces. Overall when using searching it 
 always has me thinking, and I feel like I always have the same struggle everytime 
 because I never truly understand it. 
+
+------------------------------------------------------------
 
 Analysis:
 
@@ -153,10 +164,5 @@ What is n, the main factor that makes the problem harder?
 n represents the number of open spaces on the board. 
 The more open cells there are, the more possible paths 
 exist, which makes the search take longer and use more memory.
-
-EXTRA CREDIT:
-
-N/A, I could've implemented a GUI interface, but i decided against it as 
-I am not a fan of them, and ran out of time to struggle through it.
 
 ------------------------------------------------------------
